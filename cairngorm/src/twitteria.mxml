@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" initialize="init()">
+	<mx:Script>
+	<![CDATA[
+		import twitter.api.events.TwitterEvent;
+		import twitter.api.data.TwitterUser;
+		import twitter.api.Twitter;
+		
+		private function init():void {
+			var t:Twitter = new Twitter();
+			
+			t.addEventListener(TwitterEvent.ON_FRIENDS_TIMELINE_RESULT, afterShowStatus);
+			t.loadFriendsTimeline('thillerson');
+		}
+		
+		private function afterShowStatus(te:TwitterEvent):void {
+			
+		}
+		
+	]]>
+	</mx:Script>
+</mx:Application>
