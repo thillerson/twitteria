@@ -2,6 +2,7 @@
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="init()">
 	<mx:Script>
 	<![CDATA[
+		import twitter.api.data.TwitterStatus;
 		import mx.collections.ArrayCollection;
 		import twitter.api.events.TwitterEvent;
 		import twitter.api.data.TwitterUser;
@@ -9,13 +10,15 @@
 		
 		public var username:String;
 		public var password:String;
-		public var twitterService:Twitter;
-		
-		[Bindable]
-		private var charactersLeft:int = 140;
 		
 		[Bindable]
 		public var currentTweets:ArrayCollection; // <TwitterStatus>
+		
+		[Bindable]
+		private var charactersLeft:int = 140;
+
+		private var twitterService:Twitter;
+		private var useDummyData:Boolean = true;
 		
 		private function init():void {
 			twitterService = new Twitter();
@@ -26,11 +29,19 @@
 		}
 		
 		private function reload():void {
-			twitterService.loadFriendsTimeline(username);
+			if (useDummyData) {
+				currentTweets = new ArrayCollection(getDummyData());
+			} else {
+				twitterService.loadFriendsTimeline(username);
+			}
 		}
 		
 		private function setStatus():void {
-			twitterService.setStatus(statusText.text);
+			if (useDummyData) {
+				statusSet(null);
+			} else {
+				twitterService.setStatus(statusText.text);
+			}
 		}
 		
 		private function friendsTimlineLoaded(te:TwitterEvent):void {
@@ -51,6 +62,26 @@
 			} else {
 				charactersLeftLabel.setStyle("color", 0xFF5555);
 			}
+		}
+		
+		private function getDummyData():Array {
+			var i:int;
+			var statusObj:Object;
+			var status:TwitterStatus;
+			var dd:Array = [];
+			var user:TwitterUser = new TwitterUser()
+			user.name = "Dummy User";
+			user.profileImageUrl = "https://static.twitter.com/images/default_profile_normal.png"
+			for (;i <= 10; i++) {
+				statusObj = { 
+					id:i,
+					created_at:"Sun Sep 21 22:15:04 +0000 2008",
+					text: "Dummy message #" + i 
+				}
+				status = new TwitterStatus(statusObj, user);
+				dd.push(status);
+			}
+			return dd;
 		}
 		
 	]]>
