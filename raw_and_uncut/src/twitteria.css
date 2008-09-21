@@ -1,0 +1,69 @@
+global
+{
+	font-size:			10pt;
+	color:				#333333;
+	background-color:	#565656;	
+}
+
+TextInput {
+	border-style:		solid;
+	border-color:		#565656;
+	corner-radius:		2;
+	theme-color:		#565656;	
+}
+
+.loginBox {
+	background-color: 	#DDDDDD;
+	vertical-center:	0;
+	horizontal-center:	0;
+	corner-radius:		8;
+	border-style:		solid;
+	vertical-align:		middle;
+	padding-left:		18px;
+}
+
+.twitTitle {
+	font-size:			22pt;
+	color:				#EEEEEE;
+}
+
+.riaTitle {
+	font-size:			18pt;
+	color:				#000000;
+}
+
+.loginTextInput {
+	font-size:			9pt;
+}
+
+.instructions {
+	font-weight:		bold;
+	font-size:			10pt;
+	color:				#EEEEEE;
+}
+
+.charactersLeft {
+	font-style:			italic;
+	color:				#EEEEEE;
+}
+
+.twitterUserNameText {
+	font-weight:		bold;
+	font-size:			12pt;
+	color:				#EEEEEE;
+}
+
+.statusList {
+	alternating-item-colors: #565656, #595959;
+	roll-over-color: 	#666666;
+	selection-color: 	#666666;
+}
+
+.statusRenderer {
+	background-color:	#565656;
+}
+
+.statusText {
+	font-size:			10pt;
+	color:				#EEEEEE;
+}

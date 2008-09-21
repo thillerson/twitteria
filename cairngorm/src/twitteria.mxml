@@ -10,7 +10,7 @@
 			var t:Twitter = new Twitter();
 			
 			t.addEventListener(TwitterEvent.ON_FRIENDS_TIMELINE_RESULT, afterShowStatus);
-			t.loadFriendsTimeline('thillerson');
+//			t.loadFriendsTimeline('username');
 		}
 		
 		private function afterShowStatus(te:TwitterEvent):void {
