@@ -32,6 +32,11 @@ TextInput {
 	color:				#000000;
 }
 
+.poweredBy {
+	font-size:			9pt;
+	color:				#EEEEEE;
+}
+
 .loginTextInput {
 	font-size:			9pt;
 }

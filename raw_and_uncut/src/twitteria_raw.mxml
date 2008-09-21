@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" initialize="init()" backgroundColor="#B40000">
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" backgroundColor="#B40000">
 	<mx:Style source="twitteria.css" />
 	
 	<mx:Script>
@@ -9,10 +9,6 @@
 			
 			[Bindable]
 			private var viewIndex:int		= LOGIN_VIEW;
-			
-			private function init():void {
-				
-			}
 			
 			private function login():void {
 				viewIndex = MAIN_VIEW;
@@ -24,6 +20,7 @@
 	
 	<mx:Label id="titleTwitteLabel" styleName="twitTitle" filters="{[twitteShadow]}" text="Twitte" />
 	<mx:Label id="titleRIALabel" styleName="riaTitle" left="71" top="4" filters="{[riaShadow]}" text="RIA" />
+	<mx:Label id="poweredLabel" styleName="poweredBy" right="0" top="15" filters="{[riaShadow]}" text="powered by Flex" />
 	<mx:ViewStack bottom="0" left="0" right="0" top="30" selectedIndex="{viewIndex}">
 		<local:LoginView id="loginView" login="login()" />
 		<local:MainView id="mainView" username="{loginView.username}" password="{loginView.password}" />
