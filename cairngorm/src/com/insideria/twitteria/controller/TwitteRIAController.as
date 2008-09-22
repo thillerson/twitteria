@@ -1,4 +1,4 @@
-package com.franklincovey.xcl.control {
+package com.insideria.twitteria.controller {
 	
 	import com.adobe.cairngorm.control.FrontController;
 	import com.insideria.twitteria.command.*;
@@ -11,7 +11,9 @@ package com.franklincovey.xcl.control {
 		}
 		
 		private function initialize():void {
-//			addCommand(CreateCompanyNodesForSelectedTreeItemEvent.CreateCompanyNodesForSelectedTreeItem_Event, CreateCompanyNodesForSelectedTreeItemCommand);
+			addCommand(LogInEvent.LogIn_Event, LogInCommand);
+			addCommand(LoadTimelineEvent.LoadTimeline_Event, LoadTimelineCommand);
+			addCommand(SetStatusEvent.SetStatus_Event, SetStatusCommand);
 		}
 	}
 }
