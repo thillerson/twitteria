@@ -5,11 +5,8 @@
 		import com.insideria.twitteria.event.SetStatusEvent;
 		import com.insideria.twitteria.event.LoadTimelineEvent;
 		import com.insideria.twitteria.model.TwitteRIAModel;
-		import twitter.api.data.TwitterStatus;
+
 		import mx.collections.ArrayCollection;
-		import twitter.api.events.TwitterEvent;
-		import twitter.api.data.TwitterUser;
-		import twitter.api.Twitter;
 		
 		[Bindable]
 		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
