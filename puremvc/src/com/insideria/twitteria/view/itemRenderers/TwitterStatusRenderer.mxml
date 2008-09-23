@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="360" height="72" styleName="statusRenderer">
+	<mx:Script>
+	<![CDATA[
+		import twitter.api.data.TwitterUser;
+		import twitter.api.data.TwitterStatus;
+		
+		[Bindable] private var status:TwitterStatus;
+		[Bindable] private var person:TwitterUser;
+		
+		override public function set data(value:Object):void {
+			super.data = value;
+			if (value) {
+				status = value as TwitterStatus;
+				if (status.user) {
+					person = status.user;
+				}
+			}
+		}
+		
+	]]>
+	</mx:Script>
+	
+	<mx:Image id="avatar" source="{person.profileImageUrl}" width="48" height="48" y="5" x="5"/>
+	<mx:Label id="personLabel" text="{person.name}" x="61" y="5" styleName="twitterUserNameText" />
+	<mx:Text id="statusText" text="{status.text}" truncateToFit="true" x="61" y="26" width="289" height="46" styleName="statusText"/>
+	
+</mx:Canvas>

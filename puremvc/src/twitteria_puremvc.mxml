@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:view="com.insideria.twitteria.view.components.*"
+	xmlns:controller="com.insideria.twitteria.controller.*"
+	backgroundColor="#B40000"
+	layout="absolute"
+	creationComplete="facade.startup(this)">
+
+	<mx:Style source="twitteria.css" />
+	
+	<mx:Script>
+	<![CDATA[
+		import com.insideria.twitteria.ApplicationFacade;
+		
+		private var facade:ApplicationFacade = ApplicationFacade.getInstance();
+	]]>
+	</mx:Script>
+	
+	<mx:DropShadowFilter id="twitteShadow" inner="true" distance="1" blurX="2" blurY="2" />
+	<mx:DropShadowFilter id="riaShadow" distance="1" blurX="2" blurY="2" />
+	
+	<mx:Label id="titleTwitteLabel" styleName="twitTitle" filters="{[twitteShadow]}" text="Twitte" />
+	<mx:Label id="titleRIALabel" styleName="riaTitle" left="71" top="4" filters="{[riaShadow]}" text="RIA" />
+	<mx:Label id="poweredLabel" styleName="poweredBy" right="0" top="15" filters="{[riaShadow]}" text="powered by PureMVC" />
+	<mx:ViewStack id="mainViewStack" bottom="0" left="0" right="0" top="30">
+		<view:LoginView id="loginView" />
+		<view:MainView id="mainView" />
+	</mx:ViewStack>
+	
+</mx:WindowedApplication>
