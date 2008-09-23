@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:view="com.insideria.twitteria.view.*" backgroundColor="#B40000" xmlns:controller="com.insideria.twitteria.controller.*">
+
+	<mx:Style source="twitteria.css" />
+	
+	<mx:Script>
+	<![CDATA[
+		import com.insideria.twitteria.model.TwitteRIAModel;
+		
+		[Bindable]
+		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
+	]]>
+	</mx:Script>
+	
+	<controller:TwitteRIAController id="controller" />
+	
+	<mx:DropShadowFilter id="twitteShadow" inner="true" distance="1" blurX="2" blurY="2" />
+	<mx:DropShadowFilter id="riaShadow" distance="1" blurX="2" blurY="2" />
+	
+	<mx:Label id="titleTwitteLabel" styleName="twitTitle" filters="{[twitteShadow]}" text="Twitte" />
+	<mx:Label id="titleRIALabel" styleName="riaTitle" left="71" top="4" filters="{[riaShadow]}" text="RIA" />
+	<mx:Label id="poweredLabel" styleName="poweredBy" right="0" top="15" filters="{[riaShadow]}" text="powered by Swiz" />
+	<mx:ViewStack bottom="0" left="0" right="0" top="30" selectedIndex="{model.mainViewIndex}">
+		<view:LoginView id="loginView" />
+		<view:MainView id="mainView" />
+	</mx:ViewStack>
+	
+</mx:WindowedApplication>

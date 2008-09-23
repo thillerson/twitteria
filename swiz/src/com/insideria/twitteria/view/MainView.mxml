@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="init()">
+	<mx:Script>
+	<![CDATA[
+		import com.insideria.twitteria.event.SetStatusEvent;
+		import com.insideria.twitteria.event.LoadTimelineEvent;
+		import com.insideria.twitteria.model.TwitteRIAModel;
+
+		import mx.collections.ArrayCollection;
+		
+		[Bindable]
+		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
+		
+		[Bindable]
+		private var charactersLeft:int = 140;
+
+		private function init():void {
+			reload();
+		}
+		
+		private function reload():void {
+			new LoadTimelineEvent().dispatch();
+		}
+		
+		private function setStatus():void {
+			new SetStatusEvent(statusText.text).dispatch();
+			statusText.text = '';
+			countCharactersLeft();
+		}
+		
+		private function countCharactersLeft():void {
+			var chars:int = 140 - statusText.text.length;
+			charactersLeft = Math.max(chars, 0);
+			if (charactersLeft > 10) {
+				charactersLeftLabel.setStyle("color", 0xEEEEEE);
+			} else {
+				charactersLeftLabel.setStyle("color", 0xFF5555);
+			}
+		}
+		
+	]]>
+	</mx:Script>
+	
+	<mx:List
+		id="statusList"
+		width="100%"
+		height="100%"
+		styleName="statusList"
+		itemRenderer="com.insideria.twitteria.view.itemRenderers.TwitterStatusRenderer"
+		dataProvider="{model.currentTweets}"
+	/>
+	<mx:HBox width="100%" styleName="instructions">
+		<mx:Label text="What are you doing?" />
+		<mx:Spacer width="100%" />
+		<mx:Label id="charactersLeftLabel" text="{charactersLeft}" styleName="charactersLeft" />
+	</mx:HBox>
+	<mx:TextInput id="statusText" enter="setStatus()" width="100%" maxChars="140" keyUp="countCharactersLeft()" />
+	
+</mx:VBox>
