@@ -1,21 +1,21 @@
-package com.insideria.twitteria.command {
+package com.insideria.twitteria.controller {
 	
-	import com.adobe.cairngorm.commands.ICommand;
-	import com.adobe.cairngorm.control.CairngormEvent;
+	import com.insideria.twitteria.ApplicationFacade;
+	import com.insideria.twitteria.model.*;
 	
-	import com.insideria.twitteria.event.LogInEvent;
-	import com.insideria.twitteria.model.TwitteRIAModel;
+	import org.puremvc.as3.interfaces.INotification;
+	import org.puremvc.as3.patterns.command.SimpleCommand;
 	
-	public class LogInCommand implements ICommand {
+	public class LogInCommand extends SimpleCommand {
 		
-		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
-		
-		public function execute(event:CairngormEvent):void {
-			var evt:LogInEvent = event as LogInEvent;
-			model.username = evt.username;
-			model.password = evt.password;
+		override public function execute(note:INotification):void {
+			var userProxy:UserProxy = facade.retrieveProxy(UserProxy.NAME) as UserProxy;
+			var timelineProxy:TimelineProxy = facade.retrieveProxy(TimelineProxy.NAME) as TimelineProxy;
+			var credentials:Object = note.getBody();
 			
-			model.mainViewIndex = TwitteRIAModel.MAIN_VIEW;
+			userProxy.username = credentials['username'];
+			userProxy.password = credentials['password'];
+			sendNotification(ApplicationFacade.LOAD_TIMELINE);
 		}
 		
 	}

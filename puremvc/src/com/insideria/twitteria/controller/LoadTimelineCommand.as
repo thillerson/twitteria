@@ -1,31 +1,15 @@
-package com.insideria.twitteria.command {
+package com.insideria.twitteria.controller {
 	
-	import com.adobe.cairngorm.commands.ICommand;
-	import com.adobe.cairngorm.control.CairngormEvent;
-	import com.insideria.twitteria.business.TwitterDelegate;
-	import com.insideria.twitteria.event.LoadTimelineEvent;
-	import com.insideria.twitteria.model.TwitteRIAModel;
+	import com.insideria.twitteria.model.TimelineProxy;
 	
-	import mx.collections.ArrayCollection;
-	import mx.rpc.IResponder;
+	import org.puremvc.as3.interfaces.INotification;
+	import org.puremvc.as3.patterns.command.SimpleCommand;
 	
-	public class LoadTimelineCommand implements ICommand, IResponder {
+	public class LoadTimelineCommand extends SimpleCommand {
 		
-		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
-		
-		public function execute(event:CairngormEvent):void {
-			var evt:LoadTimelineEvent = event as LoadTimelineEvent;
-			var delegate:TwitterDelegate = new TwitterDelegate(this);
-			delegate.loadTimeline();
-		}
-		
-		public function result(result:Object):void {
-			var stati:Array = result as Array;
-			model.currentTweets = new ArrayCollection(stati);
-		}
-		
-		public function fault(fault:Object):void {
-			
+		override public function execute(note:INotification):void {
+			var timelineProxy:TimelineProxy = facade.retrieveProxy(TimelineProxy.NAME) as TimelineProxy;
+			timelineProxy.reload();
 		}
 		
 	}

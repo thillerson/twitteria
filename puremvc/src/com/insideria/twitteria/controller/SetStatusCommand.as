@@ -1,30 +1,15 @@
-package com.insideria.twitteria.command {
+package com.insideria.twitteria.controller {
 	
-	import com.adobe.cairngorm.commands.ICommand;
-	import com.adobe.cairngorm.control.CairngormEvent;
-	import com.insideria.twitteria.business.TwitterDelegate;
-	import com.insideria.twitteria.event.LoadTimelineEvent;
-	import com.insideria.twitteria.event.SetStatusEvent;
-	import com.insideria.twitteria.model.TwitteRIAModel;
+	import com.insideria.twitteria.model.StatusProxy;
 	
-	import mx.rpc.IResponder;
+	import org.puremvc.as3.interfaces.INotification;
+	import org.puremvc.as3.patterns.command.SimpleCommand;
 	
-	public class SetStatusCommand implements ICommand, IResponder {
+	public class SetStatusCommand extends SimpleCommand {
 		
-		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
-		
-		public function execute(event:CairngormEvent):void {
-			var evt:SetStatusEvent = event as SetStatusEvent;
-			var delegate:TwitterDelegate = new TwitterDelegate(this);
-			delegate.setStatus(evt.statusText);
-		}
-		
-		public function result(result:Object):void {
-			new LoadTimelineEvent().dispatch();
-		}
-		
-		public function fault(fault:Object):void {
-			
+		override public function execute(note:INotification):void {
+			var statusProxy:StatusProxy = facade.retrieveProxy(StatusProxy.NAME) as StatusProxy;
+			statusProxy.setStatus(note.getBody() as String);
 		}
 		
 	}

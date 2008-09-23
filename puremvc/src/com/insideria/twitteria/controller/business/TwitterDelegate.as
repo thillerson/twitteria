@@ -1,6 +1,7 @@
-package com.insideria.twitteria.business {
+package com.insideria.twitteria.controller.business {
 	
-	import com.insideria.twitteria.model.TwitteRIAModel;
+	import com.insideria.twitteria.ApplicationFacade;
+	import com.insideria.twitteria.model.UserProxy;
 	
 	import mx.rpc.IResponder;
 	
@@ -13,27 +14,31 @@ package com.insideria.twitteria.business {
 		
 		private var responder:IResponder;
 		private var twitterService:Twitter;
-		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
 		
-		private var useDummyData:Boolean = true;
+		private var useDummyData:Boolean = false;
+		private var username:String;
+		private var password:String;
 		
 		public function TwitterDelegate(responder:IResponder) {
 			trace("creating TwitterDelegate with useDummyData: " + useDummyData);
 			this.responder = responder;
+			var userProxy:UserProxy = ApplicationFacade.getInstance().retrieveProxy(UserProxy.NAME) as UserProxy;
+			username = userProxy.username;
+			password = userProxy.password;
 			twitterService = new Twitter();
-			twitterService.setAuthenticationCredentials(model.username, model.password);
+			twitterService.setAuthenticationCredentials(username, password);
 			twitterService.addEventListener(TwitterEvent.ON_FRIENDS_TIMELINE_RESULT, friendsTimelineLoaded);
 			twitterService.addEventListener(TwitterEvent.ON_SET_STATUS, statusSet);
 		}
 		
 		public function loadTimeline():void {
-			trace("loading timeline for " + model.username);
+			trace("loading timeline for " + username);
 			if (useDummyData) {
 				var te:TwitterEvent = new TwitterEvent(TwitterEvent.ON_FRIENDS_TIMELINE_RESULT);
 				te.data = getDummyData();
 				friendsTimelineLoaded(te);
 			} else {
-				twitterService.loadFriendsTimeline(model.username);
+				twitterService.loadFriendsTimeline(username);
 			}
 		}
 		

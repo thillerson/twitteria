@@ -1,5 +1,7 @@
 package com.insideria.twitteria.view
 {
+    import com.insideria.twitteria.ApplicationFacade;
+    
     import org.puremvc.as3.interfaces.*;
     import org.puremvc.as3.patterns.mediator.Mediator;
 	 
@@ -12,9 +14,6 @@ package com.insideria.twitteria.view
         
         public function ApplicationMediator(viewComponent:twitteria_puremvc) {
             super(NAME, viewComponent);
-
-//			facade.registerMediator( new SplashScreenMediator( app.splashScreen ) );
-//			facade.registerMediator( new MainScreenMediator( app.mainScreen ) );
         }
 
         override public function listNotificationInterests():Array {
@@ -27,7 +26,7 @@ package com.insideria.twitteria.view
             switch (note.getName()) {
 				case ApplicationFacade.VIEW_TIMELINE:
 					app.mainViewStack.selectedIndex = MAIN_VIEW;
-					break;
+				break;
             }
         }
 

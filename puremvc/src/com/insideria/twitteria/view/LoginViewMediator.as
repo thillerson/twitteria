@@ -15,20 +15,16 @@ package com.insideria.twitteria.view {
         public function LoginViewMediator(viewComponent:LoginView) {
             super(NAME, viewComponent);
 			
-			loginView.addEventListener(LoginView.LOGIN, login);
+			view.addEventListener(LoginView.LOGIN, login);
         }
 
-        override public function listNotificationInterests():Array {
-            return [];
-        }
-
-        protected function get loginView():LoginView {
+        protected function get view():LoginView {
             return viewComponent as LoginView;
         }
 		
 		private function login(event:Event):void {
-			sendNotification(ApplicationFacade.LOG_IN);
-			sendNotification(ApplicationFacade.VIEW_TIMELINE);
+			var credentials:Object = {username:view.usernameText.text, password:view.passwordText.text};
+			sendNotification(ApplicationFacade.LOG_IN, credentials);
 		}
 		
     }

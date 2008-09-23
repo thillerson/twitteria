@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="init()">
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+
+	<mx:Metadata>
+		[Event(name="setStatus", type="flash.events.Event")]
+	</mx:Metadata>
+	
 	<mx:Script>
 	<![CDATA[
 		import mx.collections.ArrayCollection;
+		
+		public static const SET_STATUS:String = 'setStatus';
 
 		[Bindable]
 		private var charactersLeft:int = 140;
+		
+		[Bindable]
+		public var currentTweets:ArrayCollection; // <TwitterStatus>
 
-		private function init():void {
-			reload();
-		}
-		
-		private function reload():void {
-//			new LoadTimelineEvent().dispatch();
-		}
-		
 		private function setStatus():void {
-//			new SetStatusEvent(statusText.text).dispatch();
+			dispatchEvent(new Event(SET_STATUS));
 			statusText.text = '';
 			countCharactersLeft();
 		}
@@ -39,7 +41,8 @@
 		width="100%"
 		height="100%"
 		styleName="statusList"
-		itemRenderer="com.insideria.twitteria.view.itemRenderers.TwitterStatusRenderer"
+		itemRenderer="com.insideria.twitteria.view.components.itemRenderers.TwitterStatusRenderer"
+		dataProvider="{currentTweets}"
 	/>
 	<mx:HBox width="100%" styleName="instructions">
 		<mx:Label text="What are you doing?" />

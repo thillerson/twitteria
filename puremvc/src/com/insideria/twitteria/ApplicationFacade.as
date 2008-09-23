@@ -10,12 +10,12 @@ package com.insideria.twitteria {
 	public class ApplicationFacade extends Facade {
 		
         public static const STARTUP:String 			= "startup";
-        
-		// command
-        public static const LOG_IN:String			= "LoginCommand";
-		
-		// view
 		public static const VIEW_TIMELINE:String	= "viewTimeline";
+        public static const TIMELINE_LOADED:String	= "timelineLoaded";
+        public static const LOG_IN:String			= "login";
+        public static const LOAD_TIMELINE:String	= "loadTimeline";
+        public static const SET_STATUS:String		= "setStatus";
+        public static const STATUS_SET:String		= "statusSet";
 		
         public static function getInstance():ApplicationFacade {
             if (instance == null) instance = new ApplicationFacade();
@@ -24,16 +24,12 @@ package com.insideria.twitteria {
 
         override protected function initializeController():void {
             super.initializeController(); 
-            registerCommand(STARTUP, StartupCommand);
+            registerCommand(STARTUP,		StartupCommand);
+            registerCommand(LOG_IN,			LogInCommand);
+            registerCommand(SET_STATUS,		SetStatusCommand);
+            registerCommand(LOAD_TIMELINE,	LoadTimelineCommand);
         }
 		
-		/**
-         * Retrieve the config proxy 
-         */
-//		public static function getConfigProxy():ConfigProxy {
-//			return ConfigProxy(ApplicationFacade.getInstance().retrieveProxy(ConfigProxy.NAME));
-//		}
-//    
 		public function startup(app:twitteria_puremvc):void {
 			sendNotification(STARTUP, app);
 		}
