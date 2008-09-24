@@ -2,10 +2,18 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" initialize="usernameText.setFocus()">
 	<mx:Script>
 	<![CDATA[
-		import com.insideria.twitteria.event.LogInEvent;
+		import org.swizframework.Swiz;
+		import mx.events.DynamicEvent;
+		import com.insideria.twitteria.controllers.LoginViewController;
+		
+		[Autowire(bean="loginViewController")]
+		public var controller:LoginViewController;
 		
 		public function login():void {
-			new LogInEvent(usernameText.text, passwordText.text).dispatch();
+			var e:DynamicEvent = new DynamicEvent(LoginViewController.LOG_IN);
+			e.username = usernameText.text;
+			e.password = passwordText.text;
+			Swiz.dispatchEvent(e);
 		}
 	]]>
 	</mx:Script>

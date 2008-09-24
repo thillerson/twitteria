@@ -1,39 +1,38 @@
-package com.insideria.twitteria.business {
-	
-	import com.insideria.twitteria.model.TwitteRIAModel;
+package com.insideria.twitteria.delegates {
 	
 	import mx.rpc.IResponder;
+	
+	import org.swizframework.delegate.AbstractDelegate;
 	
 	import twitter.api.Twitter;
 	import twitter.api.data.TwitterStatus;
 	import twitter.api.data.TwitterUser;
 	import twitter.api.events.TwitterEvent;
 	
-	public class TwitterDelegate {
+	public class TwitterDelegate extends AbstractDelegate {
 		
-		private var responder:IResponder;
-		private var twitterService:Twitter;
-		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
+		[Autowire(bean="twitterService")]
+		public var twitterService:Twitter;
 		
+		private var username:String;
+		private var password:String;
 		private var useDummyData:Boolean = true;
 		
-		public function TwitterDelegate(responder:IResponder) {
-			trace("creating TwitterDelegate with useDummyData: " + useDummyData);
-			this.responder = responder;
-			twitterService = new Twitter();
-			twitterService.setAuthenticationCredentials(model.username, model.password);
-			twitterService.addEventListener(TwitterEvent.ON_FRIENDS_TIMELINE_RESULT, friendsTimelineLoaded);
-			twitterService.addEventListener(TwitterEvent.ON_SET_STATUS, statusSet);
+		public function authenticate(username:String, password:String):void {
+			this.username = username;
+			this.password = password;
+			twitterService.setAuthenticationCredentials(username, password);
 		}
 		
-		public function loadTimeline():void {
-			trace("loading timeline for " + model.username);
+		public function loadTimeline(responder:IResponder):void {
+			trace("loading timeline for " + username);
 			if (useDummyData) {
 				var te:TwitterEvent = new TwitterEvent(TwitterEvent.ON_FRIENDS_TIMELINE_RESULT);
 				te.data = getDummyData();
 				friendsTimelineLoaded(te);
 			} else {
-				twitterService.loadFriendsTimeline(model.username);
+				twitterService.addEventListener(TwitterEvent.ON_FRIENDS_TIMELINE_RESULT, friendsTimelineLoaded);
+				twitterService.loadFriendsTimeline(username);
 			}
 		}
 		
@@ -42,16 +41,17 @@ package com.insideria.twitteria.business {
 			if (useDummyData) {
 				statusSet(null);
 			} else {
+				twitterService.addEventListener(TwitterEvent.ON_SET_STATUS, statusSet);
 				twitterService.setStatus(statusText);
 			}
 		}
 		
 		private function friendsTimelineLoaded(te:TwitterEvent):void {
-			responder.result(te.data as Array);
+//			responder.result(te.data as Array);
 		}
 		
 		private function statusSet(te:TwitterEvent):void {
-			responder.result(null);
+//			responder.result(null);
 		}
 		
 		private function getDummyData():Array {

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<cairngorm:ServiceLocator xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:cairngorm="com.adobe.cairngorm.business.*" >
-	<!--
-		This is where HTTPService or RemoteObject tags would go to describe any services that delegates might access. 
-		None are needed for this application, but this file is here to show a normal Cairngorm project's structure.
-	-->
-</cairngorm:ServiceLocator>

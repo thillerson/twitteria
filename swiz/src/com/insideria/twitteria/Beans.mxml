@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BeanLoader
+	xmlns="org.swizframework.util.*" 
+	xmlns:api="twitter.api.*"
+	xmlns:delegates="com.insideria.twitteria.delegates.*"
+	xmlns:model="com.insideria.twitteria.model.*"
+	xmlns:controllers="com.insideria.twitteria.controllers.*">
+	
+	<controllers:ApplicationController id="applicationController" />
+	<controllers:LoginViewController id="loginViewController" />
+	<controllers:MainViewController id="mainViewController" />
+
+	<api:Twitter id="twitterService" />
+	<delegates:TwitterDelegate id="twitterDelegate" />
+
+</BeanLoader>
