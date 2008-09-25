@@ -1,7 +1,6 @@
 package com.insideria.twitteria.controllers {
 	
-	import com.insideria.twitteria.delegates.TwitterDelegate;
-	import com.insideria.twitteria.model.TwitteRIAModel;
+	import mx.events.DynamicEvent;
 	
 	import org.swizframework.Swiz;
 	import org.swizframework.controller.AbstractController;
@@ -9,18 +8,18 @@ package com.insideria.twitteria.controllers {
 	public class LoginViewController extends AbstractController {
 		
 		public static const LOG_IN:String = "login";
-		
-		[Autowire(bean="twitterDelegate")]
-		public var twitterDelegate:TwitterDelegate;
+		public static const LOGIN_COMPLETE:String = "loginComplete";
 		
 		[Mediate(event="login", properties="username,password")]
-		public function login(username:String, password:String) : void {
-			twitterDelegate.authenticate(username, password);
-			loginComplete();
+		public function login(username:String, password:String):void {
+			loginComplete(username, password);
 		}
 		
-		private function loginComplete() : void {
-			Swiz.dispatch("loginComplete");
+		private function loginComplete(username:String, password:String):void {
+			var de:DynamicEvent = new DynamicEvent(LOGIN_COMPLETE);
+			de.username = username;
+			de.password = password;
+			Swiz.dispatchEvent(de);
 		}
 		
 	}

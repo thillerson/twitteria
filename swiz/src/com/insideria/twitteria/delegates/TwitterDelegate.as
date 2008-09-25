@@ -1,6 +1,6 @@
 package com.insideria.twitteria.delegates {
 	
-	import mx.rpc.IResponder;
+	import com.insideria.twitteria.delegates.twitter.TwitterResponder;
 	
 	import org.swizframework.delegate.AbstractDelegate;
 	
@@ -11,20 +11,17 @@ package com.insideria.twitteria.delegates {
 	
 	public class TwitterDelegate extends AbstractDelegate {
 		
-		[Autowire(bean="twitterService")]
-		public var twitterService:Twitter;
-		
-		private var username:String;
-		private var password:String;
+		private var twitterService:Twitter;
+		private var twitterResponder:TwitterResponder;
 		private var useDummyData:Boolean = true;
 		
-		public function authenticate(username:String, password:String):void {
-			this.username = username;
-			this.password = password;
-			twitterService.setAuthenticationCredentials(username, password);
+		public function TwitterDelegate(twitterResponder:TwitterResponder) {
+			twitterService = new Twitter();
+			twitterService.setAuthenticationCredentials(twitterResponder.username, twitterResponder.password);
+			this.twitterResponder = twitterResponder;
 		}
 		
-		public function loadTimeline(responder:IResponder):void {
+		public function loadTimeline(username:String):void {
 			trace("loading timeline for " + username);
 			if (useDummyData) {
 				var te:TwitterEvent = new TwitterEvent(TwitterEvent.ON_FRIENDS_TIMELINE_RESULT);
@@ -47,11 +44,11 @@ package com.insideria.twitteria.delegates {
 		}
 		
 		private function friendsTimelineLoaded(te:TwitterEvent):void {
-//			responder.result(te.data as Array);
+			twitterResponder.friendsTimelineResult(te.data as Array);
 		}
 		
 		private function statusSet(te:TwitterEvent):void {
-//			responder.result(null);
+			twitterResponder.setStatusResult();
 		}
 		
 		private function getDummyData():Array {

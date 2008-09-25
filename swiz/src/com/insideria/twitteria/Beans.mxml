@@ -11,6 +11,5 @@
 	<controllers:MainViewController id="mainViewController" />
 
 	<api:Twitter id="twitterService" />
-	<delegates:TwitterDelegate id="twitterDelegate" />
 
 </BeanLoader>

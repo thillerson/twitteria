@@ -8,13 +8,13 @@
 		
 		[Bindable]
 		[Autowire(bean="mainViewController")]
-		private var controller:MainViewController;
+		public var controller:MainViewController;
 		
 		[Bindable]
 		private var charactersLeft:int = 140;
 
 		private function setStatus():void {
-//			new SetStatusEvent(statusText.text).dispatch();
+			controller.setStatus(statusText.text);
 			statusText.text = '';
 			countCharactersLeft();
 		}
