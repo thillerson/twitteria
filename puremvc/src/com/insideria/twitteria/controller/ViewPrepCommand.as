@@ -1,7 +1,6 @@
 package com.insideria.twitteria.controller {
 	
 	import com.insideria.twitteria.ApplicationFacade;
-	import com.insideria.twitteria.command.*;
 	import com.insideria.twitteria.model.*;
 	import com.insideria.twitteria.view.*;
 	
