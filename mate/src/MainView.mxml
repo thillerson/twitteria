@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="init()">
+	<mx:Script>
+	<![CDATA[
+		import twitter.api.data.TwitterStatus;
+		import mx.collections.ArrayCollection;
+		import twitter.api.events.TwitterEvent;
+		import twitter.api.data.TwitterUser;
+		import twitter.api.Twitter;
+		
+		public var username:String;
+		public var password:String;
+		
+		[Bindable]
+		public var currentTweets:ArrayCollection; // <TwitterStatus>
+		
+		[Bindable]
+		private var charactersLeft:int = 140;
+
+		private var twitterService:Twitter;
+		private var useDummyData:Boolean = true;
+		
+		private function init():void {
+			twitterService = new Twitter();
+			twitterService.setAuthenticationCredentials(username, password);
+			twitterService.addEventListener(TwitterEvent.ON_FRIENDS_TIMELINE_RESULT, friendsTimlineLoaded);
+			twitterService.addEventListener(TwitterEvent.ON_SET_STATUS, statusSet);
+			reload();
+		}
+		
+		private function reload():void {
+			if (useDummyData) {
+				currentTweets = new ArrayCollection(getDummyData());
+			} else {
+				twitterService.loadFriendsTimeline(username);
+			}
+		}
+		
+		private function setStatus():void {
+			if (useDummyData) {
+				statusSet(null);
+			} else {
+				twitterService.setStatus(statusText.text);
+			}
+		}
+		
+		private function friendsTimlineLoaded(te:TwitterEvent):void {
+			currentTweets = new ArrayCollection(te.data as Array);
+		}
+		
+		private function statusSet(te:TwitterEvent):void {
+			statusText.text = '';
+			countCharactersLeft();
+			reload();
+		}
+		
+		private function countCharactersLeft():void {
+			var chars:int = 140 - statusText.text.length;
+			charactersLeft = Math.max(chars, 0);
+			if (charactersLeft > 10) {
+				charactersLeftLabel.setStyle("color", 0xEEEEEE);
+			} else {
+				charactersLeftLabel.setStyle("color", 0xFF5555);
+			}
+		}
+		
+		private function getDummyData():Array {
+			var i:int;
+			var statusObj:Object;
+			var status:TwitterStatus;
+			var dd:Array = [];
+			var user:TwitterUser = new TwitterUser()
+			user.name = "Dummy User";
+			user.profileImageUrl = "https://static.twitter.com/images/default_profile_normal.png"
+			for (;i <= 10; i++) {
+				statusObj = { 
+					id:i,
+					created_at:"Sun Sep 21 22:15:04 +0000 2008",
+					text: "Dummy message #" + i 
+				}
+				status = new TwitterStatus(statusObj, user);
+				dd.push(status);
+			}
+			return dd;
+		}
+		
+	]]>
+	</mx:Script>
+	
+	<mx:List id="statusList" width="100%" height="100%" styleName="statusList" itemRenderer="TwitterStatusRenderer" dataProvider="{currentTweets}" />
+	<mx:HBox width="100%" styleName="instructions">
+		<mx:Label text="What are you doing?" />
+		<mx:Spacer width="100%" />
+		<mx:Label id="charactersLeftLabel" text="{charactersLeft}" styleName="charactersLeft" />
+	</mx:HBox>
+	<mx:TextInput id="statusText" enter="setStatus()" width="100%" maxChars="140" keyUp="countCharactersLeft()" />
+	
+</mx:VBox>
