@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="init()" xmlns:status="com.insideria.twitteria.view.status.*">
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:status="com.insideria.twitteria.view.status.*" width="100%" height="100%" creationComplete="init()" >
 	<mx:Script>
 	<![CDATA[
 		import com.insideria.twitteria.event.SetStatusEvent;
@@ -12,10 +12,6 @@
 		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
 		
 		private function init():void {
-			reload();
-		}
-		
-		private function reload():void {
 			new LoadTimelineEvent().dispatch();
 		}
 		
