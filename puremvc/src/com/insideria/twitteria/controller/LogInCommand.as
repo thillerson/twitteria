@@ -10,7 +10,6 @@ package com.insideria.twitteria.controller {
 		
 		override public function execute(note:INotification):void {
 			var userProxy:UserProxy = facade.retrieveProxy(UserProxy.NAME) as UserProxy;
-			var timelineProxy:TimelineProxy = facade.retrieveProxy(TimelineProxy.NAME) as TimelineProxy;
 			var credentials:Object = note.getBody();
 			
 			userProxy.username = credentials['username'];

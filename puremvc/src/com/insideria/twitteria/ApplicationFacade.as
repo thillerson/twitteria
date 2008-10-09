@@ -1,19 +1,17 @@
 package com.insideria.twitteria {
 	
     import com.insideria.twitteria.controller.*;
-    import com.insideria.twitteria.model.*;
     
     import org.puremvc.as3.interfaces.*;
     import org.puremvc.as3.patterns.facade.*;
-    import org.puremvc.as3.patterns.proxy.*;
 
 	public class ApplicationFacade extends Facade {
 		
         public static const STARTUP:String 			= "startup";
-		public static const VIEW_TIMELINE:String	= "viewTimeline";
-        public static const TIMELINE_LOADED:String	= "timelineLoaded";
         public static const LOG_IN:String			= "login";
+		public static const VIEW_TIMELINE:String	= "viewTimeline";
         public static const LOAD_TIMELINE:String	= "loadTimeline";
+        public static const TIMELINE_LOADED:String	= "timelineLoaded";
         public static const SET_STATUS:String		= "setStatus";
         public static const STATUS_SET:String		= "statusSet";
 		
