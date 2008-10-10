@@ -2,6 +2,7 @@ package com.insideria.twitteria.controllers {
 	
 	import com.insideria.twitteria.delegates.TwitterDelegate;
 	import com.insideria.twitteria.delegates.twitter.TwitterResponder;
+	import com.insideria.twitteria.model.TwitteRIAModel;
 	
 	import flash.events.Event;
 	
@@ -15,11 +16,11 @@ package com.insideria.twitteria.controllers {
 		
 		public static const SET_STATUS:String = "setStatus";
 		
+		[Autowire(bean="model")]
+		public var model:TwitteRIAModel;
+		
 		[Bindable]
 		public var currentTweets:ArrayCollection;
-		
-		private var _username:String;
-		private var _password:String;
 		
 		public function MainViewController() {
 			Swiz.addEventListener(LoginViewController.LOGIN_COMPLETE, loginComplete);
@@ -36,11 +37,11 @@ package com.insideria.twitteria.controllers {
 		}
 		
 		public function get username():String {
-			return _username;
+			return model.username;
 		}
 		
 		public function get password():String {
-			return _password;
+			return model.password;
 		}
 		
 		public function friendsTimelineResult(tweets:Array):void {
@@ -53,9 +54,6 @@ package com.insideria.twitteria.controllers {
 		}
 		
 		private function loginComplete(e:Event):void {
-			var de:DynamicEvent = e as DynamicEvent;
-			_username = de.username;
-			_password = de.password;
 			loadTweets();
 		}
 		

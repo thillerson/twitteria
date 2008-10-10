@@ -9,6 +9,8 @@
 	<controllers:ApplicationController id="applicationController" />
 	<controllers:LoginViewController id="loginViewController" />
 	<controllers:MainViewController id="mainViewController" />
+	
+	<model:TwitteRIAModel id="model" />
 
 	<api:Twitter id="twitterService" />
 

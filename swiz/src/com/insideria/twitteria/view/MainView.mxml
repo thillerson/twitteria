@@ -4,8 +4,6 @@
 	<![CDATA[
 		import com.insideria.twitteria.controllers.MainViewController;
 
-		import mx.collections.ArrayCollection;
-		
 		[Bindable]
 		[Autowire(bean="mainViewController")]
 		public var controller:MainViewController;
