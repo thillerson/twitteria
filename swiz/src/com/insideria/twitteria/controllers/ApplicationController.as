@@ -1,5 +1,7 @@
 package com.insideria.twitteria.controllers {
 	
+	import com.insideria.twitteria.model.TwitteRIAModel;
+	
 	import flash.events.Event;
 	
 	import org.swizframework.Swiz;
@@ -7,19 +9,15 @@ package com.insideria.twitteria.controllers {
 	
 	public class ApplicationController extends AbstractController {
 		
-		// view states
-		public static const LOGIN_VIEW:int	= 0;
-		public static const MAIN_VIEW:int	= 1;
-
-		[Bindable]
-		public var mainViewIndex:int		= LOGIN_VIEW;
+		[Autowire(bean="model")]
+		public var model:TwitteRIAModel;
 		
 		public function ApplicationController() {
 			Swiz.addEventListener("loginComplete", showMainView);
 		}
 				
 		public function showMainView(e:Event):void {
-			mainViewIndex = MAIN_VIEW;
+			model.mainViewIndex = TwitteRIAModel.MAIN_VIEW;
 		}
 		
 	}

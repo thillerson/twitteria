@@ -12,13 +12,17 @@
 	
 	<mx:Script>
 	<![CDATA[
+		import com.insideria.twitteria.model.TwitteRIAModel;
 		import com.insideria.twitteria.Beans;
 		import org.swizframework.Swiz;
 		import com.insideria.twitteria.controllers.ApplicationController;
 		
-		[Bindable]
 		[Autowire(bean="applicationController")]
 		public var controller:ApplicationController;
+		
+		[Bindable]
+		[Autowire(bean="model")]
+		public var model:TwitteRIAModel;
 		
 		private function loadBeans():void {
 			Swiz.loadBeans([Beans]);
@@ -33,7 +37,7 @@
 	<mx:Label id="titleTwitteLabel" styleName="twitTitle" filters="{[twitteShadow]}" text="Twitte" />
 	<mx:Label id="titleRIALabel" styleName="riaTitle" left="71" top="4" filters="{[riaShadow]}" text="RIA" />
 	<mx:Label id="poweredLabel" styleName="poweredBy" right="0" top="15" filters="{[riaShadow]}" text="powered by Swiz" />
-	<mx:ViewStack bottom="0" left="0" right="0" top="30" selectedIndex="{controller.mainViewIndex}">
+	<mx:ViewStack bottom="0" left="0" right="0" top="30" selectedIndex="{model.mainViewIndex}">
 		<view:LoginView id="loginView" />
 		<view:MainView id="mainView" />
 	</mx:ViewStack>
