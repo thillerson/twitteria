@@ -19,9 +19,6 @@ package com.insideria.twitteria.controllers {
 		[Autowire(bean="model")]
 		public var model:TwitteRIAModel;
 		
-		[Bindable]
-		public var currentTweets:ArrayCollection;
-		
 		public function MainViewController() {
 			Swiz.addEventListener(LoginViewController.LOGIN_COMPLETE, loginComplete);
 		}
@@ -45,7 +42,7 @@ package com.insideria.twitteria.controllers {
 		}
 		
 		public function friendsTimelineResult(tweets:Array):void {
-			currentTweets = new ArrayCollection(tweets);
+			model.currentTweets = new ArrayCollection(tweets);
 		}
 		
 		public function setStatusResult():void {

@@ -2,11 +2,15 @@
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:status="com.insideria.twitteria.view.status.*">
 	<mx:Script>
 	<![CDATA[
+		import com.insideria.twitteria.model.TwitteRIAModel;
 		import com.insideria.twitteria.controllers.MainViewController;
 
-		[Bindable]
 		[Autowire(bean="mainViewController")]
 		public var controller:MainViewController;
+		
+		[Bindable]
+		[Autowire(bean="model")]
+		public var model:TwitteRIAModel;
 		
 		private function setStatus():void {
 			controller.setStatus(statusText.text); 
@@ -22,7 +26,7 @@
 		height="100%"
 		styleName="statusList"
 		itemRenderer="com.insideria.twitteria.view.itemRenderers.TwitterStatusRenderer"
-		dataProvider="{controller.currentTweets}"
+		dataProvider="{model.currentTweets}"
 	/>
 	<mx:HBox width="100%" styleName="instructions">
 		<mx:Label text="What are you doing?" />
