@@ -15,7 +15,7 @@ package com.insideria.twitteria.controller.business {
 		private var responder:IResponder;
 		private var twitterService:Twitter;
 		
-		private var useDummyData:Boolean = false;
+		private var useDummyData:Boolean = true;
 		private var username:String;
 		private var password:String;
 		
