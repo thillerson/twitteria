@@ -2,7 +2,7 @@ package com.insideria.twitteria.controllers {
 	
 	import com.insideria.twitteria.model.TwitteRIAModel;
 	
-	import mx.events.DynamicEvent;
+	import flash.events.Event;
 	
 	import org.swizframework.Swiz;
 	import org.swizframework.controller.AbstractController;
@@ -20,8 +20,8 @@ package com.insideria.twitteria.controllers {
 			model.username = username;
 			model.password = password;
 			
-			var de:DynamicEvent = new DynamicEvent(LOGIN_COMPLETE);
-			Swiz.dispatchEvent(de);
+			var e:Event = new Event(LOGIN_COMPLETE);
+			Swiz.dispatchEvent(e);
 		}
 		
 	}
