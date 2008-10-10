@@ -12,6 +12,4 @@
 	
 	<model:TwitteRIAModel id="model" />
 
-	<api:Twitter id="twitterService" />
-
 </BeanLoader>

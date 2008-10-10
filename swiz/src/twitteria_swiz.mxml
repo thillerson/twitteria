@@ -17,9 +17,6 @@
 		import org.swizframework.Swiz;
 		import com.insideria.twitteria.controllers.ApplicationController;
 		
-		[Autowire(bean="applicationController")]
-		public var controller:ApplicationController;
-		
 		[Bindable]
 		[Autowire(bean="model")]
 		public var model:TwitteRIAModel;
