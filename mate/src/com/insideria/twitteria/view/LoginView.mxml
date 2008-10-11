@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" initialize="usernameText.setFocus()">
 	<mx:Metadata>
-		[Event(name='login', type='flash.events.Event')]
+		[Event(name='login', type='com.insideria.twitteria.events.LoginEvent')]
 	</mx:Metadata>
 	
 	<mx:Script>
 	<![CDATA[
-		[Bindable] public var username:String;
-		[Bindable] public var password:String;
-		
+		import com.insideria.twitteria.events.LoginEvent;
 		public function login():void {
-			username = usernameText.text;
-			password = passwordText.text;
-			dispatchEvent(new Event('login'));
+			var le:LoginEvent = new LoginEvent(usernameText.text, passwordText.text); 
+			dispatchEvent(le);
 		}
 	]]>
 	</mx:Script>

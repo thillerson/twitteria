@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" backgroundColor="#B40000">
-	<mx:Style source="twitteria.css" />
-	
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" backgroundColor="#B40000" xmlns:view="com.insideria.twitteria.view.*" xmlns:maps="com.insideria.twitteria.maps.*" xmlns:mate="http://mate.asfusion.com/">
 	<mx:Script>
 		<![CDATA[
-			private const LOGIN_VIEW:int	= 0;
-			private const MAIN_VIEW:int		= 1;
+			import com.insideria.twitteria.events.ViewStateEvent;
 			
-			[Bindable]
-			private var viewIndex:int		= LOGIN_VIEW;
+			public const LOGIN_VIEW:int	= 0;
+			public const MAIN_VIEW:int	= 1;
 			
-			private function login():void {
-				viewIndex = MAIN_VIEW;
+			private function showMainView(e:Event):void {
+				mainViewStack.selectedIndex = MAIN_VIEW;
 			}
 		]]>
 	</mx:Script>
+
+	<mx:Style source="twitteria.css" />
+	
 	<mx:DropShadowFilter id="twitteShadow" inner="true" distance="1" blurX="2" blurY="2" />
 	<mx:DropShadowFilter id="riaShadow" distance="1" blurX="2" blurY="2" />
+
+	<maps:MainEventMap />
+	
+	<mate:Listener type="{ViewStateEvent.SHOW_MAIN_VIEW}" method="showMainView" />
 	
 	<mx:Label id="titleTwitteLabel" styleName="twitTitle" filters="{[twitteShadow]}" text="Twitte" />
 	<mx:Label id="titleRIALabel" styleName="riaTitle" left="71" top="4" filters="{[riaShadow]}" text="RIA" />
-	<mx:Label id="poweredLabel" styleName="poweredBy" right="0" top="15" filters="{[riaShadow]}" text="powered by Flex" />
-	<mx:ViewStack bottom="0" left="0" right="0" top="30" selectedIndex="{viewIndex}">
-		<local:LoginView id="loginView" login="login()" />
-		<local:MainView id="mainView" username="{loginView.username}" password="{loginView.password}" />
+	<mx:Label id="poweredLabel" styleName="poweredBy" right="0" top="15" filters="{[riaShadow]}" text="powered by Mate" />
+	<mx:ViewStack id="mainViewStack" bottom="0" left="0" right="0" top="30">
+		<view:LoginView id="loginView" />
+		<view:MainView id="mainView" />
 	</mx:ViewStack>
 	
 </mx:WindowedApplication>

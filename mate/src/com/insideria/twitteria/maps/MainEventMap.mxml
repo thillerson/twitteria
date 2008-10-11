@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EventMap xmlns="http://mate.asfusion.com/" xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+	<![CDATA[
+	import com.insideria.twitteria.business.*;
+	import com.insideria.twitteria.events.*;
+	import com.insideria.twitteria.view.*;
+	]]>
+	</mx:Script>
+	
+	<Debugger level="{Debugger.ALL}" />
+	
+	<EventHandlers type="{LoginEvent.LOG_IN}" debug="true">
+		<ObjectBuilder generator="{TwitterDelegate}" constructorArguments="{[event.username, event.password, scope.dispatcher]}" />
+		<MethodInvoker generator="{TwitterDelegate}" method="loadTimeline" />
+	</EventHandlers>
+	
+	<EventHandlers type="{TimelineReceivedEvent.TIMELINE_RECEIVED}" debug="true">
+		<MethodInvoker generator="{TwitterManager}" method="setCurrentTweets" arguments="{[event.tweets]}" />
+		<EventAnnouncer generator="{ViewStateEvent}" type="{ViewStateEvent.SHOW_MAIN_VIEW}" bubbles="true" />
+	</EventHandlers>
+
+	<EventHandlers type="{SetStatusEvent.SET_STATUS}" debug="true">
+		<MethodInvoker generator="{TwitterDelegate}" method="setStatus" arguments="{[event.statusText]}" />
+	</EventHandlers>
+	
+	<EventHandlers type="{StatusSetEvent.STATUS_SET}" debug="true">
+		<MethodInvoker generator="{TwitterDelegate}" method="loadTimeline" />
+	</EventHandlers>
+	
+	<Injectors target="{MainView}">
+		<PropertyInjector source="{TwitterManager}" sourceKey="currentTweets" targetKey="currentTweets" />
+	</Injectors>
+	
+</EventMap>

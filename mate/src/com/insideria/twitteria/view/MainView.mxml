@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:status="com.insideria.twitteria.view.status.*">
+
+	<mx:Script>
+	<![CDATA[
+		import com.insideria.twitteria.events.SetStatusEvent;
+		import mx.collections.ArrayCollection;
+		
+		[Bindable]
+		public var currentTweets:ArrayCollection; // <TwitterStatus>
+
+		private function setStatus():void {
+			var e:SetStatusEvent = new SetStatusEvent(statusText.text);
+			dispatchEvent(e);
+			statusText.clear();
+		}
+		
+	]]>
+	</mx:Script>
+	
+	<mx:List
+		id="statusList"
+		width="100%"
+		height="100%"
+		styleName="statusList"
+		itemRenderer="com.insideria.twitteria.view.itemRenderers.TwitterStatusRenderer"
+		dataProvider="{currentTweets}"
+	/>
+	<mx:HBox width="100%" styleName="instructions">
+		<mx:Label text="What are you doing?" />
+		<mx:Spacer width="100%" />
+		<mx:Label id="charactersLeftLabel" text="{statusText.charactersLeft}" styleName="charactersLeft" />
+	</mx:HBox>
+	<status:StatusText
+		id="statusText"
+		width="100%"
+		status="setStatus()"
+		limitWarning="charactersLeftLabel.setStyle('color', 0xFF5555)"
+		underLimit="charactersLeftLabel.setStyle('color', 0xEEEEEE)"
+	/>
+	
+</mx:VBox>

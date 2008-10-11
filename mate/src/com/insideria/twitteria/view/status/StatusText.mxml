@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TextInput xmlns:mx="http://www.adobe.com/2006/mxml" maxChars="140" keyUp="countCharactersLeft()" enter="setStatus()">
+	
+	<mx:Metadata>
+		[Event(name="status", type="flash.events.Event")]
+		[Event(name="limitWarning", type="flash.events.Event")]
+		[Event(name="underLimit", type="flash.events.Event")]
+	</mx:Metadata>
+	
+	<mx:Script>
+	<![CDATA[
+	
+		[Bindable]
+		public var charactersLeft:int = 140;
+
+		public function clear():void {
+			text = '';
+			countCharactersLeft();
+		}
+
+		private function countCharactersLeft():void {
+			var chars:int = 140 - text.length;
+			charactersLeft = Math.max(chars, 0);
+			
+			var e:Event;
+			if (charactersLeft > 10) {
+				e = new Event('underLimit');
+			} else {
+				e = new Event('limitWarning');
+			}
+			dispatchEvent(e);
+		}
+		
+		private function setStatus():void {
+			var e:Event = new Event('status');
+			dispatchEvent(e);
+		}
+		
+	]]>
+	</mx:Script>
+</mx:TextInput>
