@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<actionScriptProperties mainApplicationPath="twitteria_raw.mxml" version="3">
+<actionScriptProperties mainApplicationPath="twitteria_mate.mxml" version="3">
 <compiler additionalCompilerArguments="-locale en_US" copyDependentFiles="true" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.28" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="true" verifyDigests="true" warn="true">
 <compilerSourcePath/>
 <libraryPath defaultLinkType="1">
@@ -9,7 +9,7 @@
 <sourceAttachmentPath/>
 </compiler>
 <applications>
-<application path="twitteria_raw.mxml"/>
+<application path="twitteria_mate.mxml"/>
 </applications>
 <modules/>
 <buildCSSFiles/>
