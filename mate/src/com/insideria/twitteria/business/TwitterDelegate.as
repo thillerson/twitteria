@@ -14,7 +14,7 @@ package com.insideria.twitteria.business {
 		
 		private var twitterService:Twitter;
 		
-		private var useDummyData:Boolean = false;
+		private var useDummyData:Boolean = true;
 		private var dispatcher:IEventDispatcher;
 		private var username:String;
 		private var password:String;

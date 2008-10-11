@@ -7,6 +7,7 @@ package com.insideria.twitteria.business {
 		private var _username:String;
 		private var _password:String;
 		
+		[Bindable]
 		public var currentTweets:ArrayCollection;
 		
 		public function get username():String {
