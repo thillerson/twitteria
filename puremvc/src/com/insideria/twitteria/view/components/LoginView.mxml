@@ -9,6 +9,9 @@
 	<![CDATA[
 		public static const LOGIN:String = 'login';
 	
+		/**
+		 * PureMVC has the views using POFEs - plain old flash events :-)
+		 */
 		public function login():void {
 			dispatchEvent(new Event(LOGIN));
 		}

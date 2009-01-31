@@ -8,6 +8,11 @@ package com.insideria.twitteria.controller {
 	
 	public class LogInCommand extends SimpleCommand {
 		
+		/**
+		 * Execute is where the main responsibilities of the command are 
+		 * executed. Here we set the credentials on the appropriate Proxy
+		 * and tell the system that we're ready to load the timeline
+		 */
 		override public function execute(note:INotification):void {
 			var userProxy:UserProxy = facade.retrieveProxy(UserProxy.NAME) as UserProxy;
 			var credentials:Object = note.getBody();

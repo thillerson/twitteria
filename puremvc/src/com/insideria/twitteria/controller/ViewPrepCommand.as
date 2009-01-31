@@ -9,6 +9,11 @@ package com.insideria.twitteria.controller {
 	
 	public class ViewPrepCommand extends SimpleCommand {
 		
+		/**
+		 * Prepping the View means instantiating mediators
+		 * and giving them references to the parts of the view they
+		 * mediate
+		 */		
 		override public function execute(note:INotification):void {
 			var app:twitteria_puremvc = note.getBody() as twitteria_puremvc;
 			facade.registerMediator(new ApplicationMediator(app));

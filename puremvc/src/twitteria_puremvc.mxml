@@ -13,6 +13,9 @@
 	<![CDATA[
 		import com.insideria.twitteria.ApplicationFacade;
 		
+		// We get a reference to our implementation of the Facade here
+		// so that we can call startup on it in the creationComplete event
+		// on the root tag
 		private var facade:ApplicationFacade = ApplicationFacade.getInstance();
 	]]>
 	</mx:Script>

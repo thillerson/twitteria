@@ -8,6 +8,10 @@ package com.insideria.twitteria.controller {
 	
 	public class ModelPrepCommand extends SimpleCommand {
 		
+		/**
+		 * Prepping the model means registering Proxies, which 
+		 * are members of the Model tier in PureMVC
+		 */		
 		override public function execute(note:INotification):void {
 			facade.registerProxy(new TimelineProxy());
 			facade.registerProxy(new StatusProxy());

@@ -33,6 +33,8 @@ package com.insideria.twitteria.view {
         override public function handleNotification( note:INotification ):void {
             switch (note.getName()) {
 				case ApplicationFacade.TIMELINE_LOADED:
+					// Here we have a case of getting some data from a proxy
+					// and setting it on the view
 					view.currentTweets = getTimelineProxy().currentTweets;
 				break;
             }

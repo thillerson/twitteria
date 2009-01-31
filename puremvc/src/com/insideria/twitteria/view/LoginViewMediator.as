@@ -22,6 +22,9 @@ package com.insideria.twitteria.view {
             return viewComponent as LoginView;
         }
 		
+		/**
+		 * When the view dispatches the login event, send the LOG_IN note
+		 */		
 		private function login(event:Event):void {
 			var credentials:Object = {username:view.usernameText.text, password:view.passwordText.text};
 			sendNotification(ApplicationFacade.LOG_IN, credentials);
