@@ -19,6 +19,10 @@ package com.insideria.twitteria.business {
 		private var username:String;
 		private var password:String;
 		
+		/**
+		 * When constructed, we get the credentials and an event dispatcher to dispatch events through
+		 * so that the EventMap will recieve them
+		 */
 		public function TwitterDelegate(username:String, password:String, dispatcher:IEventDispatcher) {
 			trace("creating TwitterDelegate with useDummyData: " + useDummyData);
 			this.username = username;

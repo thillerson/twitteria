@@ -4,6 +4,8 @@
 		[Event(name='login', type='com.insideria.twitteria.events.LoginEvent')]
 	</mx:Metadata>
 	
+	<!-- I can't find any Mate here, can you? -->
+	
 	<mx:Script>
 	<![CDATA[
 		import com.insideria.twitteria.events.LoginEvent;

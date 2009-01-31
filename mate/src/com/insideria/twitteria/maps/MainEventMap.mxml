@@ -8,14 +8,21 @@
 	]]>
 	</mx:Script>
 	
+	<!-- A debugger, for free! -->
 	<Debugger level="{Debugger.ALL}" />
 	
+	<!-- EventHandlers do the work corresponding to an event -->
 	<EventHandlers type="{LoginEvent.LOG_IN}" debug="true">
+		<!-- An ObjectBuilder builds an object object of a certain type and caches that object for later use, 
+			indexed by class (see below). We use this so that we can pass arguments to the contructor -->
 		<ObjectBuilder generator="{TwitterDelegate}" constructorArguments="{[event.username, event.password, scope.dispatcher]}" />
+		<!-- The TwitterDelegate used by this MethodInvoker will be the one constructed by the ObjectBuilder -->
 		<MethodInvoker generator="{TwitterDelegate}" method="loadTimeline" />
 	</EventHandlers>
 	
 	<EventHandlers type="{TimelineReceivedEvent.TIMELINE_RECEIVED}" debug="true">
+		<!-- Without an ObjectBuilder, the first call to a class in the generator attribute of a MethodInvoker
+			will be cached and used the next time the class is referenced -->
 		<MethodInvoker generator="{TwitterManager}" method="setCurrentTweets" arguments="{[event.tweets]}" />
 		<EventAnnouncer generator="{ViewStateEvent}" type="{ViewStateEvent.SHOW_MAIN_VIEW}" bubbles="true" />
 	</EventHandlers>
@@ -28,7 +35,10 @@
 		<MethodInvoker generator="{TwitterDelegate}" method="loadTimeline" />
 	</EventHandlers>
 	
+	<!-- This injector references the MainView which was already instantiated on the root -->
 	<Injectors target="{MainView}">
+		<!-- Whenever the currentTweets property on the cached TwitterManager changes, Mate sets the 
+			currentTweets property on the MainView to point to that property -->
 		<PropertyInjector source="{TwitterManager}" sourceKey="currentTweets" targetKey="currentTweets" />
 	</Injectors>
 	

@@ -18,8 +18,10 @@
 	<mx:DropShadowFilter id="twitteShadow" inner="true" distance="1" blurX="2" blurY="2" />
 	<mx:DropShadowFilter id="riaShadow" distance="1" blurX="2" blurY="2" />
 
+	<!-- Any event maps need to be instantiated on the root -->
 	<maps:MainEventMap />
 	
+	<!-- Here is an example of a declarative listener which calls a local method -->
 	<mate:Listener type="{ViewStateEvent.SHOW_MAIN_VIEW}" method="showMainView" />
 	
 	<mx:Label id="titleTwitteLabel" styleName="twitTitle" filters="{[twitteShadow]}" text="Twitte" />
