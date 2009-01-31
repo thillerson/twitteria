@@ -17,6 +17,10 @@ package com.insideria.twitteria.business {
 		
 		private var useDummyData:Boolean = true;
 		
+		/**
+		 * The Delegate's responsibility is to encapsulate the services to isolate the
+		 * application from changes to the services
+		 */
 		public function TwitterDelegate(responder:IResponder) {
 			trace("creating TwitterDelegate with useDummyData: " + useDummyData);
 			this.responder = responder;

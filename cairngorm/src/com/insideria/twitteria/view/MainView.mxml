@@ -12,10 +12,12 @@
 		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
 		
 		private function init():void {
+			// Dispatches the LoadTimelineEvent, which corresponds to the LoadTimelineCommand
 			new LoadTimelineEvent().dispatch();
 		}
 		
 		private function setStatus():void {
+			// Dispatches the SetStatusEvent, which corresponds to the SetStatusCommand
 			new SetStatusEvent(statusText.text).dispatch();
 			statusText.clear();
 		}
@@ -29,8 +31,9 @@
 		height="100%"
 		styleName="statusList"
 		itemRenderer="com.insideria.twitteria.view.itemRenderers.TwitterStatusRenderer"
-		dataProvider="{model.currentTweets}"
-	/>
+		dataProvider="{model.currentTweets}" 
+	/><!-- The data provider is bound to the model ^^ -->
+	
 	<mx:HBox width="100%" styleName="instructions">
 		<mx:Label text="What are you doing?" />
 		<mx:Spacer width="100%" />

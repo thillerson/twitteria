@@ -7,11 +7,15 @@
 	<![CDATA[
 		import com.insideria.twitteria.model.TwitteRIAModel;
 		
+		
+		// We get a reference to the model through the Model Locator
+		// which is a singleton
 		[Bindable]
 		private var model:TwitteRIAModel = TwitteRIAModel.getInstance();
 	]]>
 	</mx:Script>
 	
+	<!-- The Front Controller needs to be instantiated at the application level -->
 	<controller:TwitteRIAController id="controller" />
 	
 	<mx:DropShadowFilter id="twitteShadow" inner="true" distance="1" blurX="2" blurY="2" />
@@ -20,6 +24,10 @@
 	<mx:Label id="titleTwitteLabel" styleName="twitTitle" filters="{[twitteShadow]}" text="Twitte" />
 	<mx:Label id="titleRIALabel" styleName="riaTitle" left="71" top="4" filters="{[riaShadow]}" text="RIA" />
 	<mx:Label id="poweredLabel" styleName="poweredBy" right="0" top="15" filters="{[riaShadow]}" text="powered by Cairngorm" />
+	
+	<!-- This is typical Cairngorm - binding something in the view to the model to change state when the model changes
+		Here the view stack's selected index is bound to a variable that can be thought of as holding the state of the main view 
+		which can be either the login or main state -->
 	<mx:ViewStack bottom="0" left="0" right="0" top="30" selectedIndex="{model.mainViewIndex}">
 		<view:LoginView id="loginView" />
 		<view:MainView id="mainView" />

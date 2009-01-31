@@ -10,6 +10,9 @@ package com.insideria.twitteria.controller {
 			initialize();
 		}
 		
+		// The Front Controller's responsibility is to match CairngormEvents to 
+		// CairngormCommands. To make that work, you associate them in your implementation
+		// of the controller, like here
 		private function initialize():void {
 			addCommand(LogInEvent.LogIn_Event, LogInCommand);
 			addCommand(LoadTimelineEvent.LoadTimeline_Event, LoadTimelineCommand);
