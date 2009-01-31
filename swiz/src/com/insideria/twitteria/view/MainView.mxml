@@ -5,9 +5,11 @@
 		import com.insideria.twitteria.model.TwitteRIAModel;
 		import com.insideria.twitteria.controllers.MainViewController;
 
+		// Give me a main controller, Swiz
 		[Autowire(bean="mainViewController")]
 		public var controller:MainViewController;
 		
+		// Give me a model, Swiz
 		[Bindable]
 		[Autowire(bean="model")]
 		public var model:TwitteRIAModel;

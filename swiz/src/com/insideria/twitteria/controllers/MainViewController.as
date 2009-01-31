@@ -20,6 +20,7 @@ package com.insideria.twitteria.controllers {
 		public var model:TwitteRIAModel;
 		
 		public function MainViewController() {
+			// Here is an example of listening for a swiz dispatched event
 			Swiz.addEventListener(LoginViewController.LOGIN_COMPLETE, loginComplete);
 		}
 		

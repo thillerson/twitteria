@@ -6,6 +6,9 @@
 		import mx.events.DynamicEvent;
 		import com.insideria.twitteria.controllers.LoginViewController;
 		
+		/**
+		 * Dispatch a dynamic event containing the credentials
+		 */
 		public function login():void {
 			var e:DynamicEvent = new DynamicEvent(LoginViewController.LOG_IN);
 			e.username = usernameText.text;

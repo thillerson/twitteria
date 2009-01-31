@@ -6,6 +6,9 @@
 	xmlns:model="com.insideria.twitteria.model.*"
 	xmlns:controllers="com.insideria.twitteria.controllers.*">
 	
+	<!-- Any classes instantiated here are available for Autowiring
+		using the id -->
+	
 	<controllers:ApplicationController id="applicationController" />
 	<controllers:LoginViewController id="loginViewController" />
 	<controllers:MainViewController id="mainViewController" />

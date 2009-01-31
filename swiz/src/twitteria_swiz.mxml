@@ -17,10 +17,18 @@
 		import org.swizframework.Swiz;
 		import com.insideria.twitteria.controllers.ApplicationController;
 		
+		// We're holding a reference to the model on the view
+		// But the view doesn't need to know how to get that reference
+		// Autowire does the work for us
 		[Bindable]
 		[Autowire(bean="model")]
 		public var model:TwitteRIAModel;
 		
+		/**
+		 * This needs to be called on preInitialize.
+		 * This is where the magic starts.
+		 * Beans, Beans the magical fruit!
+		 */
 		private function loadBeans():void {
 			Swiz.loadBeans([Beans]);
 		}
